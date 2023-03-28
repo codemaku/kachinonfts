@@ -456,8 +456,6 @@ export default function Home() {
             {utils.formatEther(ethBalance)} Ether
             <br />
             {utils.formatEther(lpBalance)} Kachino-ETH LP tokens
-            <br />
-            {utils.formatEther(reservedCD)} Total Kachino-ETH LP tokens
           </div>
           <input
             type="number"
