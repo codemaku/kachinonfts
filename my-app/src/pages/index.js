@@ -29,7 +29,7 @@ export default function Home() {
           <Link className={styles.link} href="ico">
             ICO
           </Link>
-          <Link className={styles.link} href="dex">
+          <Link className={styles.link} href="cashier">
             Cashier
           </Link>
         </div>
