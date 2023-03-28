@@ -542,6 +542,11 @@ export default function Home() {
           <div className={styles.description}>
             {utils.formatEther(etherBalanceContract) * 2} ETH TVL
           </div>
+          <div className={styles.description}>
+            {utils.formatEther(reservedCD) /
+              utils.formatEther(etherBalanceContract)}{" "}
+            Kachino/ETH
+          </div>
           {/* <div className={styles.description}> Price of Kachino: {Price}</div> */}
           <div>
             <button
