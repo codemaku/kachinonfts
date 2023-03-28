@@ -356,7 +356,9 @@ export default function Home() {
             <br />
             {utils.formatEther(ethBalance)} Ether
             <br />
-            {utils.formatEther(lpBalance)} Kachino LP tokens
+            {utils.formatEther(lpBalance)} Kachino-ETH LP tokens
+            <br />
+            {utils.formatEther(reservedCD)} Total Kachino-ETH LP tokens
           </div>
           <div>
             {/* If reserved CD is zero, render the state for liquidity zero where we ask the user
