@@ -543,9 +543,9 @@ export default function Home() {
             {utils.formatEther(etherBalanceContract) * 2} ETH TVL
           </div>
           <div className={styles.description}>
-            {utils.formatEther(reservedCD) /
-              utils.formatEther(etherBalanceContract)}{" "}
-            Kachino/ETH
+            {utils.formatEther(etherBalanceContract) /
+              utils.formatEther(reservedCD)}{" "}
+            ETH/Kachino
           </div>
           {/* <div className={styles.description}> Price of Kachino: {Price}</div> */}
           <div>
