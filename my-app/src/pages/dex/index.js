@@ -62,6 +62,7 @@ export default function Home() {
   // This keeps track of the number of tokens that the user would receive after a swap completes
   const [tokenToBeReceivedAfterSwap, settokenToBeReceivedAfterSwap] =
     useState(zero);
+  const [Price, setPrice] = useState(zero);
   // Keeps track of whether  `Eth` or `Crypto Dev` token is selected. If `Eth` is selected it means that the user
   // wants to swap some `Eth` for some `Crypto Dev` tokens and vice versa if `Eth` is not selected
   const [ethSelected, setEthSelected] = useState(true);
@@ -96,6 +97,7 @@ export default function Home() {
       setReservedCD(_reservedCD);
       setReservedCD(_reservedCD);
       setEtherBalanceContract(_ethBalanceContract);
+      // _getPrice();
     } catch (err) {
       console.error(err);
     }
@@ -159,6 +161,35 @@ export default function Home() {
         settokenToBeReceivedAfterSwap(amountOfTokens);
       } else {
         settokenToBeReceivedAfterSwap(zero);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const _getPrice = async () => {
+    try {
+      // Convert the amount entered by the user to a BigNumber using the `parseEther` library from `ethers.js`
+      const _swapAmount = 0.01;
+      const _swapAmountWEI = utils.parseEther(_swapAmount.toString());
+      // Check if the user entered zero
+      // We are here using the `eq` method from BigNumber class in `ethers.js`
+      if (!_swapAmountWEI.eq(zero)) {
+        const provider = await getProviderOrSigner();
+        // Get the amount of ether in the contract
+        const _ethBalance = await getEtherBalance(provider, null, true);
+        // Call the `getAmountOfTokensReceivedFromSwap` from the utils folder
+        const amountOfTokens = await getAmountOfTokensReceivedFromSwap(
+          _swapAmountWEI,
+          provider,
+          ethSelected,
+          _ethBalance,
+          reservedCD
+        );
+        setPrice(amountOfTokens);
+        console.log(Price);
+      } else {
+        setPrice(zero);
       }
     } catch (err) {
       console.error(err);
@@ -500,16 +531,17 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Kachino Dex</title>
+        <title>Kachino Cashier</title>
         <meta name="description" content="Whitelist-Dapp" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.main}>
         <div>
-          <h1 className={styles.title}>Welcome to Kachino Dex!</h1>
+          <h1 className={styles.title}>Welcome to Kachino Cashier!</h1>
           <div className={styles.description}>
             Exchange Ethereum &#60;&#62; Kachino Tokens
           </div>
+          {/* <div className={styles.description}> Price of Kachino: {Price}</div> */}
           <div>
             <button
               className={styles.button}

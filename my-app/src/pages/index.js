@@ -30,7 +30,7 @@ export default function Home() {
             ICO
           </Link>
           <Link className={styles.link} href="dex">
-            DEX
+            Cashier
           </Link>
         </div>
         <div>
