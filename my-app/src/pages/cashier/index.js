@@ -186,7 +186,9 @@ export default function Home() {
       // Convert the ether amount entered by the user to Bignumber
       const addEtherWei = utils.parseEther(addEther.toString());
       // Check if the values are zero
-      if (!addCDTokens.eq(zero) && !addEtherWei.eq(zero)) {
+      if (addEtherWei > ethBalance) {
+        window.alert("You are too poor");
+      } else if (!addCDTokens.eq(zero) && !addEtherWei.eq(zero)) {
         const signer = await getProviderOrSigner(true);
         setLoading(true);
         // call the addLiquidity function from the utils folder
