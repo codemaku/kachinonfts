@@ -441,6 +441,18 @@ export default function Home() {
     } else {
       return (
         <div>
+          <div className={styles.description}>
+            You have:
+            <br />
+            {/* Convert the BigNumber to string using the formatEther function from ethers.js */}
+            {utils.formatEther(cdBalance)} Kachino Tokens
+            <br />
+            {utils.formatEther(ethBalance)} Ether
+            <br />
+            {utils.formatEther(lpBalance)} Kachino-ETH LP tokens
+            <br />
+            {utils.formatEther(reservedCD)} Total Kachino-ETH LP tokens
+          </div>
           <input
             type="number"
             placeholder="Amount"
