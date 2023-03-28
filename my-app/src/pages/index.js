@@ -18,6 +18,12 @@ export default function Home() {
         <div>
           <h1 className={styles.title}>Welcome to Kachino!</h1>
           <div className={styles.description}>Its a decentralised casino!</div>
+          <div className={styles.description}>Upcoming Roadmap:</div>
+          <div className={styles.description}>- Initial Coin Offering</div>
+          <div className={styles.description}>
+            - Custom Decentralised Exchange
+          </div>
+          <div className={styles.description}>- Table Games</div>
           <Link className={styles.link} href="whitelist">
             Whitelist
           </Link>
