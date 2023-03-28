@@ -376,12 +376,12 @@ export default function Home() {
     <div>
       <Head>
         <title>Kachino ICO</title>
-        <meta name="description" content="ICO-Dapp" />
+        <meta name="description" content="kachino-ico" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.main}>
         <div>
-          <h1 className={styles.title}>Welcome to Kachino ICO!</h1>
+          <h1 className={styles.title}>Kachino ICO</h1>
           <div className={styles.description}>
             You can claim or mint Kachino tokens here. 10 free Kachino per NFT
             you hold!

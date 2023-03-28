@@ -11,15 +11,13 @@ export default function Home() {
     <div>
       <Head>
         <title>Kachino</title>
-        <meta name="description" content="Whitelist-Dapp" />
+        <meta name="description" content="kachino-home" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.main}>
         <div>
           <h1 className={styles.title}>Welcome to Kachino!</h1>
           <div className={styles.description}>Its a decentralised casino!</div>
-          <div className={styles.description}>Upcoming Roadmap:</div>
-          <div className={styles.description}>- Table Games</div>
           <Link className={styles.link} href="whitelist">
             Whitelist
           </Link>
@@ -31,6 +29,9 @@ export default function Home() {
           </Link>
           <Link className={styles.link} href="cashier">
             Cashier
+          </Link>
+          <Link className={styles.link} href="roulettehilo">
+            Roulette Hi Lo
           </Link>
         </div>
         <div>

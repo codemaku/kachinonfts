@@ -505,12 +505,12 @@ export default function Home() {
     <div>
       <Head>
         <title>Kachino Cashier</title>
-        <meta name="description" content="Whitelist-Dapp" />
+        <meta name="description" content="kachino-cashier" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.main}>
         <div>
-          <h1 className={styles.title}>Welcome to Kachino Cashier!</h1>
+          <h1 className={styles.title}>Kachino Cashier</h1>
           <div className={styles.description}>
             Exchange Ethereum &#60;&#62; Kachino Tokens
           </div>

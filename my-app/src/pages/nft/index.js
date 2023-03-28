@@ -350,12 +350,12 @@ export default function Home() {
     <div>
       <Head>
         <title>Kachino NFTs</title>
-        <meta name="description" content="Whitelist-Dapp" />
+        <meta name="description" content="kachino-nfts" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.main}>
         <div>
-          <h1 className={styles.title}>Welcome to Kachino NFTs!</h1>
+          <h1 className={styles.title}>Kachino NFTs</h1>
           <div className={styles.description}>
             Its an NFT collection for Kachino.
           </div>
