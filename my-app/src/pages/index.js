@@ -30,6 +30,9 @@ export default function Home() {
           <Link className={styles.link} href="nft">
             Mint NFT
           </Link>
+          <Link className={styles.link} href="ico">
+            ICO
+          </Link>
         </div>
         <div>
           <img className={styles.image} src="./cards.svg" />
