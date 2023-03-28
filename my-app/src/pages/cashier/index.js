@@ -540,7 +540,7 @@ export default function Home() {
             Exchange Ethereum &#60;&#62; Kachino Tokens
           </div>
           <div className={styles.description}>
-            {utils.formatEther(reservedCD)} Total Kachino-ETH LP tokens
+            {utils.formatEther(ethBalance) * 2} ETH TVL
           </div>
           {/* <div className={styles.description}> Price of Kachino: {Price}</div> */}
           <div>
