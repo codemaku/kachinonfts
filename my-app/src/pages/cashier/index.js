@@ -388,8 +388,6 @@ export default function Home() {
             {utils.formatEther(ethBalance)} Ether
             <br />
             {utils.formatEther(lpBalance)} Kachino-ETH LP tokens
-            <br />
-            {utils.formatEther(reservedCD)} Total Kachino-ETH LP tokens
           </div>
           <div>
             {/* If reserved CD is zero, render the state for liquidity zero where we ask the user
@@ -540,6 +538,9 @@ export default function Home() {
           <h1 className={styles.title}>Welcome to Kachino Cashier!</h1>
           <div className={styles.description}>
             Exchange Ethereum &#60;&#62; Kachino Tokens
+          </div>
+          <div className={styles.description}>
+            {utils.formatEther(reservedCD)} Total Kachino-ETH LP tokens
           </div>
           {/* <div className={styles.description}> Price of Kachino: {Price}</div> */}
           <div>
