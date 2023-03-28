@@ -383,7 +383,11 @@ export default function Home() {
         <div>
           <h1 className={styles.title}>Welcome to Kachino ICO!</h1>
           <div className={styles.description}>
-            You can claim or mint Kachino tokens here
+            You can claim or mint Kachino tokens here. 10 free Kachino per NFT
+            you hold!
+          </div>
+          <div className={styles.description}>
+            Price of Kachino Token is 0.001 ETH. Early!
           </div>
           {walletConnected ? (
             <div>
