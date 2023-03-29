@@ -93,7 +93,9 @@ export default function Home() {
       );
       setLoading(true);
       // call the startGame function from the contract
-      const tx = await randomGameNFTContract.startGame(isHigh, entryFee);
+      const tx = await randomGameNFTContract.betRoll(isHigh, entryFee, {
+        value: entryFee,
+      });
       await tx.wait();
       setLoading(false);
     } catch (err) {

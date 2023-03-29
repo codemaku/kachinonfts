@@ -10,37 +10,30 @@ export const abi = [
       },
       {
         indexed: false,
-        internalType: "address",
-        name: "winner",
-        type: "address",
-      },
-    ],
-    name: "GameEnded",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "gameId",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint8",
-        name: "maxPlayers",
-        type: "uint8",
+        internalType: "bool",
+        name: "isHigh",
+        type: "bool",
       },
       {
         indexed: false,
         internalType: "uint256",
-        name: "entryFee",
+        name: "betAmount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "rollResult",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "betResult",
         type: "uint256",
       },
     ],
-    name: "GameStarted",
+    name: "NewRoll",
     type: "event",
   },
   {
@@ -63,39 +56,25 @@ export const abi = [
     type: "event",
   },
   {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "gameId",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "player",
-        type: "address",
-      },
-    ],
-    name: "PlayerJoined",
-    type: "event",
-  },
-  {
     stateMutability: "payable",
     type: "fallback",
   },
   {
-    inputs: [],
-    name: "fee",
-    outputs: [
+    inputs: [
+      {
+        internalType: "bool",
+        name: "_isHigh",
+        type: "bool",
+      },
       {
         internalType: "uint256",
-        name: "",
+        name: "_betAmount",
         type: "uint256",
       },
     ],
-    stateMutability: "view",
+    name: "betRoll",
+    outputs: [],
+    stateMutability: "payable",
     type: "function",
   },
   {
@@ -113,59 +92,7 @@ export const abi = [
   },
   {
     inputs: [],
-    name: "gameStarted",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "joinGame",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "keyHash",
-    outputs: [
-      {
-        internalType: "bytes32",
-        name: "",
-        type: "bytes32",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "owner",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    name: "players",
     outputs: [
       {
         internalType: "address",
@@ -186,30 +113,19 @@ export const abi = [
   {
     inputs: [
       {
-        internalType: "uint8",
-        name: "_maxPlayers",
-        type: "uint8",
-      },
-      {
-        internalType: "uint256",
-        name: "_entryFee",
-        type: "uint256",
-      },
-    ],
-    name: "startGame",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
         internalType: "address",
         name: "newOwner",
         type: "address",
       },
     ],
     name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "withdraw",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
