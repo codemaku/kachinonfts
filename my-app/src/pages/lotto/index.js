@@ -326,6 +326,8 @@ export default function Home() {
             Its a lottery game where a winner is chosen at random and wins the
             entire lottery pool
           </div>
+          <div> Entry fee is: {utils.formatEther(entryFee)} ETH</div>
+          <br />
           {renderButton()}
           {logs &&
             logs.map((log, index) => (
