@@ -7,9 +7,9 @@ import {
   abi,
   RANDOM_GAME_NFT_CONTRACT_ADDRESS,
 } from "../../../constants/lotto";
-import { FETCH_CREATED_GAME } from "../../../queries";
+import { FETCH_CREATED_GAME } from "../../../queries/lotto";
 import styles from "../../styles/Home.module.css";
-import { subgraphQuery } from "../../../utils";
+import { subgraphQuery } from "../../../utils/lotto";
 
 export default function Home() {
   const zero = BigNumber.from("0");

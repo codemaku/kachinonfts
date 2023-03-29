@@ -1,5 +1,48 @@
-export const ROULETTE_ADDRESS = "0x71868960Bcb4D68F783C0Ed70D4297Dc615a9A74";
-export const ROULETTE_ABI = [
+export const abi = [
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "gameId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "winner",
+        type: "address",
+      },
+    ],
+    name: "GameEnded",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "gameId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint8",
+        name: "maxPlayers",
+        type: "uint8",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "entryFee",
+        type: "uint256",
+      },
+    ],
+    name: "GameStarted",
+    type: "event",
+  },
   {
     anonymous: false,
     inputs: [
@@ -20,12 +63,31 @@ export const ROULETTE_ABI = [
     type: "event",
   },
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "gameId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "player",
+        type: "address",
+      },
+    ],
+    name: "PlayerJoined",
+    type: "event",
+  },
+  {
     stateMutability: "payable",
     type: "fallback",
   },
   {
     inputs: [],
-    name: "lastRoll",
+    name: "fee",
     outputs: [
       {
         internalType: "uint256",
@@ -38,7 +100,72 @@ export const ROULETTE_ABI = [
   },
   {
     inputs: [],
+    name: "gameId",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "gameStarted",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "joinGame",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "keyHash",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "owner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "players",
     outputs: [
       {
         internalType: "address",
@@ -59,27 +186,19 @@ export const ROULETTE_ABI = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
+        internalType: "uint8",
+        name: "_maxPlayers",
+        type: "uint8",
       },
-    ],
-    name: "rollHigh",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [
       {
         internalType: "uint256",
-        name: "_amount",
+        name: "_entryFee",
         type: "uint256",
       },
     ],
-    name: "rollLow",
+    name: "startGame",
     outputs: [],
-    stateMutability: "payable",
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -96,14 +215,9 @@ export const ROULETTE_ABI = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "withdraw",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     stateMutability: "payable",
     type: "receive",
   },
 ];
+export const RANDOM_GAME_NFT_CONTRACT_ADDRESS =
+  "0x90067a22fE10BDc565fa6E4786c4c976e3348e28";
