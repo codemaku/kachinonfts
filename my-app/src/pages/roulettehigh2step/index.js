@@ -398,7 +398,7 @@ export default function Home() {
           <div className={styles.description}>Game Results</div>
           {resultLogs.gameEndeds?.map((log, index) => (
             <div className={styles.log} key={index}>
-              Id{")"} {log.gameId} GameBlock{")"} {log.gameBlock} Roll{")"}{" "}
+              Id{")"} {log.gameId} betBlock{")"} {log.gameBlock} Roll{")"}{" "}
               {log.roll}
             </div>
           ))}
