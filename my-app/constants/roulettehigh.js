@@ -10,30 +10,18 @@ export const abi = [
       },
       {
         indexed: false,
-        internalType: "bool",
-        name: "isHigh",
-        type: "bool",
-      },
-      {
-        indexed: false,
         internalType: "uint256",
-        name: "betAmount",
+        name: "entryFee",
         type: "uint256",
       },
       {
         indexed: false,
         internalType: "uint256",
-        name: "rollResult",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "betResult",
+        name: "roll",
         type: "uint256",
       },
     ],
-    name: "NewRoll",
+    name: "GameStarted",
     type: "event",
   },
   {
@@ -58,24 +46,6 @@ export const abi = [
   {
     stateMutability: "payable",
     type: "fallback",
-  },
-  {
-    inputs: [
-      {
-        internalType: "bool",
-        name: "_isHigh",
-        type: "bool",
-      },
-      {
-        internalType: "uint256",
-        name: "_betAmount",
-        type: "uint256",
-      },
-    ],
-    name: "betRoll",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
   },
   {
     inputs: [],
@@ -104,10 +74,42 @@ export const abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "players",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "renounceOwnership",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_entryFee",
+        type: "uint256",
+      },
+    ],
+    name: "startGame",
+    outputs: [],
+    stateMutability: "payable",
     type: "function",
   },
   {
@@ -136,4 +138,4 @@ export const abi = [
   },
 ];
 export const RANDOM_GAME_NFT_CONTRACT_ADDRESS =
-  "0x90067a22fE10BDc565fa6E4786c4c976e3348e28";
+  "0x68Fe7a9dde3E3C20599eB3B3711e95054d384602";

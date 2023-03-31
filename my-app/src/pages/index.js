@@ -33,8 +33,8 @@ export default function Home() {
           <Link className={styles.link} href="lotto">
             Lotto
           </Link>
-          <Link className={styles.link} href="roulettehilo">
-            Roulette Hi Lo
+          <Link className={styles.link} href="roulettehigh">
+            Roulette High
           </Link>
         </div>
         <div>

@@ -158,6 +158,7 @@ export default function Home() {
       const _gameStarted = await randomGameNFTContract.gameStarted();
 
       const _gameArray = await subgraphQuery(FETCH_CREATED_GAME());
+      console.log(_gameArray);
       const _game = _gameArray.games[0];
       let _logs = [];
       // Initialize the logs array and query the graph for current gameID

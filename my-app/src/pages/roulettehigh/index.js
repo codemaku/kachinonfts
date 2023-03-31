@@ -6,10 +6,10 @@ import Web3Modal from "web3modal";
 import {
   abi,
   RANDOM_GAME_NFT_CONTRACT_ADDRESS,
-} from "../../../constants/roulettehilo";
-import { FETCH_CREATED_GAME } from "../../../queries/roulettehilo";
+} from "../../../constants/roulettehigh";
+import { FETCH_CREATED_GAME } from "../../../queries/roulettehigh";
 import styles from "../../styles/Home.module.css";
-import { subgraphQuery } from "../../../utils/roulettehilo";
+import { subgraphQuery } from "../../../utils/roulettehigh";
 
 export default function Home() {
   const zero = BigNumber.from("0");
@@ -25,6 +25,8 @@ export default function Home() {
   const [logs, setLogs] = useState([]);
   // Create a reference to the Web3 Modal (used for connecting to Metamask) which persists as long as the page is open
   const web3ModalRef = useRef();
+  // Keeps track of the ether balance in the contract
+  const [etherBalanceContract, setEtherBalanceContract] = useState(zero);
 
   // This is used to force react to re render the page when we want to
   // in our case we will use force update to show new logs
@@ -39,6 +41,10 @@ export default function Home() {
       // When used for the first time, it prompts the user to connect their wallet
       await getProviderOrSigner();
       setWalletConnected(true);
+      // get the amount of eth in the user's account
+      const provider = await getProviderOrSigner(false);
+      const _ethBalanceContract = await getEtherBalance(provider, null, true);
+      setEtherBalanceContract(_ethBalanceContract);
     } catch (err) {
       console.error(err);
     }
@@ -93,14 +99,50 @@ export default function Home() {
       );
       setLoading(true);
       // call the startGame function from the contract
-      const tx = await randomGameNFTContract.betRoll(isHigh, entryFee, {
+      const tx = await randomGameNFTContract.startGame(entryFee, {
         value: entryFee,
       });
       await tx.wait();
       setLoading(false);
+      getLogsFromGraph();
     } catch (err) {
       console.error(err);
       setLoading(false);
+    }
+  };
+
+  const getLogsFromGraph = async () => {
+    try {
+      const _gameArray = await subgraphQuery(FETCH_CREATED_GAME());
+      // console.log(_gameArray.gameStarteds[0]);
+      // let _logs = [];
+      setLogs(_gameArray);
+      forceUpdate();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  /**
+   * getEtherBalance: Retrieves the ether balance of the user or the contract
+   */
+  const getEtherBalance = async (provider, address, contract = false) => {
+    try {
+      // If the caller has set the `contract` boolean to true, retrieve the balance of
+      // ether in the `exchange contract`, if it is set to false, retrieve the balance
+      // of the user's address
+      if (contract) {
+        const balance = await provider.getBalance(
+          RANDOM_GAME_NFT_CONTRACT_ADDRESS
+        );
+        return balance;
+      } else {
+        const balance = await provider.getBalance(address);
+        return balance;
+      }
+    } catch (err) {
+      console.error(err);
+      return 0;
     }
   };
 
@@ -118,6 +160,7 @@ export default function Home() {
         disableInjectedProvider: false,
       });
       connectWallet();
+      getLogsFromGraph();
     }
   }, [walletConnected]);
 
@@ -154,17 +197,6 @@ export default function Home() {
           }}
           placeholder="Bet amount (ETH)"
         />
-        <select
-          className={styles.select}
-          name="dropdown"
-          id="dropdown"
-          onChange={async (e) => {
-            setIsHigh(e.target.value);
-          }}
-        >
-          <option value={true}>Bet High</option>
-          <option value={false}>Bet Low</option>
-        </select>
         <button className={styles.button} onClick={startGame}>
           Roll da ball 🚀
         </button>
@@ -175,23 +207,28 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Kachino Roulette Hi Lo</title>
+        <title>Kachino Roulette High</title>
         <meta name="description" content="kachino-roulette" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.main}>
         <div>
-          <h1 className={styles.title}>Kachino Roulette Hi Lo</h1>
+          <h1 className={styles.title}>Kachino Roulette High</h1>
           <div className={styles.description}>
-            Its a simplified roulette game where you can bet either high or low
+            Its a simplified roulette game where you can bet on high ie 19-36.
+            ProTip: dont bet more than Dealer's ETH.
+            <br />
+            <br />
+            {utils.formatEther(etherBalanceContract)} Dealer ETH Balance
           </div>
+
           {renderButton()}
-          {logs &&
-            logs.map((log, index) => (
-              <div className={styles.log} key={index}>
-                {log}
-              </div>
-            ))}
+          {logs.gameStarteds?.map((log, index) => (
+            <div className={styles.log} key={index}>
+              Id{")"} {log.gameId} Roll{")"} {log.roll} Bet{")"}
+              {utils.formatEther(log.entryFee)} ETH
+            </div>
+          ))}
         </div>
         <div>
           <img className={styles.image} src="./cards.svg" />
