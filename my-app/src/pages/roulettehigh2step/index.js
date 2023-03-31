@@ -389,6 +389,8 @@ export default function Home() {
           <div className={styles.description}>Players Joined</div>
           {playerLogs.playerJoineds?.map((log, index) => (
             <div className={styles.log} key={index}>
+              {log.player}
+              <br />
               Id{")"} {log.gameId} Bet Amount{")"}{" "}
               {utils.formatEther(log.betAmount)} ETH
             </div>
