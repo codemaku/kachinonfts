@@ -216,7 +216,11 @@ export default function Home() {
           <h1 className={styles.title}>Kachino Roulette High</h1>
           <div className={styles.description}>
             Its a simplified roulette game where you can bet on high ie 19-36.
-            ProTip: dont bet more than Dealer's ETH.
+          </div>
+          <div className={styles.description}>
+            Protip: dont bet more than the Dealers bankroll.
+          </div>
+          <div>
             <br />
             <br />
             {utils.formatEther(etherBalanceContract)} Dealer ETH Balance
