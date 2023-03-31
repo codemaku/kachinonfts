@@ -73,7 +73,7 @@ export default function Home() {
 
   /**
    * getAmounts call various functions to retrive amounts for ethbalance,
-   * LP tokens etc
+   * LP tokens etc update
    */
   const getAmounts = async () => {
     try {
