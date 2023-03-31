@@ -383,7 +383,7 @@ export default function Home() {
           <div className={styles.description}>Created Games</div>
           {createdLogs.gameStarteds?.map((log, index) => (
             <div className={styles.log} key={index}>
-              Id{")"} {log.gameId} GameBlock{")"} {log.gameBlock}
+              Id{")"} {log.gameId} betBlock{")"} {log.gameBlock}
             </div>
           ))}
           <div className={styles.description}>Players Joined</div>
@@ -398,8 +398,7 @@ export default function Home() {
           <div className={styles.description}>Game Results</div>
           {resultLogs.gameEndeds?.map((log, index) => (
             <div className={styles.log} key={index}>
-              Id{")"} {log.gameId} betBlock{")"} {log.gameBlock} Roll{")"}{" "}
-              {log.roll}
+              Id{")"} {log.gameId} Roll{")"} {log.roll}
             </div>
           ))}
         </div>
