@@ -410,36 +410,118 @@ export default function Home() {
           {renderButton()}
 
           <div className={styles.description}>Created Games</div>
-          {createdLogs.gameStarteds?.map((log, index) => (
-            <div className={styles.log} key={index}>
-              Id{")"} {log.gameId} betBlock{")"} {log.gameBlock}
-            </div>
-          ))}
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>betBlock</th>
+              </tr>
+            </thead>
+            <tbody>
+              {createdLogs.gameStarteds?.map((log, index) => (
+                <tr key={index}>
+                  <td>
+                    <div>{log.gameId}</div>
+                  </td>
+                  <td>
+                    <div>{log.gameBlock}</div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
           <div className={styles.description}>Players Joined</div>
-          {playerLogs.playerJoineds?.map((log, index) => (
-            <div className={styles.log} key={index}>
-              {log.player}
-              <br />
-              Id{")"} {log.gameId} BetPlaced{")"}
-              {log.betPlaced} BetAmount{")"} {utils.formatEther(log.betAmount)}{" "}
-              ETH
-            </div>
-          ))}
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>BetPlaced</th>
+                <th>BetAmount</th>
+                <th>Player</th>
+              </tr>
+            </thead>
+            <tbody>
+              {playerLogs.playerJoineds?.map((log, index) => (
+                <tr key={index}>
+                  <td>
+                    <div>{log.gameId}</div>
+                  </td>
+                  <td>
+                    <div>{log.betPlaced}</div>
+                  </td>
+                  <td>
+                    <div>{utils.formatEther(log.betAmount)} ETH</div>
+                  </td>
+                  <td>
+                    <div>{log.player.slice(-5)}</div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
           <div className={styles.description}>
             Cards Dealt (1=A,2=2,...,Q=12,K=13)
           </div>
-          {cardLogs.cardsDealts?.map((log, index) => (
-            <div className={styles.log} key={index}>
-              Id{")"} {log.gameId} p1{")"} {log.p1} p2{")"} {log.p2} p3{")"}{" "}
-              {log.p3} b1{")"} {log.b1} b2{")"} {log.b2} b3{")"} {log.b3}
-            </div>
-          ))}
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th colspan="3">Player</th>
+                <th colspan="3">Banker</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cardLogs.cardsDealts?.map((log, index) => (
+                <tr key={index}>
+                  <td>
+                    <div>{log.gameId}</div>
+                  </td>
+                  <td>
+                    <div>{log.p1}</div>
+                  </td>
+                  <td>
+                    <div>{log.p2}</div>
+                  </td>
+                  <td>
+                    <div>{log.p3 == 0 ? "" : log.p3}</div>
+                  </td>
+                  <td>
+                    <div>{log.b1}</div>
+                  </td>
+                  <td>
+                    <div>{log.b2}</div>
+                  </td>
+                  <td>
+                    <div>{log.b3 == 0 ? "" : log.b3}</div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
           <div className={styles.description}>Game Results</div>
-          {resultLogs.gameEndeds?.map((log, index) => (
-            <div className={styles.log} key={index}>
-              Id{")"} {log.gameId} Result{")"} {log.roll}
-            </div>
-          ))}
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              {resultLogs.gameEndeds?.map((log, index) => (
+                <tr key={index}>
+                  <td>
+                    <div>{log.gameId}</div>
+                  </td>
+                  <td>
+                    <div>{log.roll}</div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
         <div>
           <img className={styles.image} src="./cards.svg" />

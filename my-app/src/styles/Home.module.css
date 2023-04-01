@@ -107,3 +107,9 @@
   cursor: pointer;
   margin: 2%;
 }
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+}
