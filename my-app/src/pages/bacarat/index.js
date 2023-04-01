@@ -375,14 +375,28 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Kachino Bacarat Banker</title>
+        <title>Kachino Bacarat</title>
         <meta name="description" content="kachino-bacarat-banker" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.main}>
         <div>
-          <h1 className={styles.title}>Kachino Bacarat Banker</h1>
-          <div className={styles.description}>Decentralised Bacarat</div>
+          {/* <h1 className={styles.title}>Kachino Bacarat</h1> */}
+
+          <h3 className={styles.description}>Player</h3>
+          <grid>
+            <div className={styles.player1}></div>
+            <div className={styles.player1}></div>
+            <div className={styles.player2}></div>
+          </grid>
+          <div className={styles.clearBoth} />
+          <h3 className={styles.description}>Banker</h3>
+          <grid>
+            <div className={styles.player1}></div>
+            <div className={styles.player1}></div>
+            <div className={styles.player2}></div>
+          </grid>
+          <div className={styles.clearBoth} />
           <div>
             <br />
             Max bet per round:
@@ -523,11 +537,7 @@ export default function Home() {
             </tbody>
           </table>
         </div>
-        <div>
-          <img className={styles.image} src="./cards.svg" />
-        </div>
       </div>
-
       <footer className={styles.footer}>
         <Link href=".">Back to Home</Link>
       </footer>

@@ -6,12 +6,17 @@
   align-items: center;
   font-family: "Courier New", Courier, monospace;
   padding: 1em;
+  background: url(/bluebg.jpeg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .footer {
   display: flex;
   padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid #444;
   justify-content: center;
   align-items: center;
 }
@@ -24,20 +29,22 @@
 
 .title {
   font-size: 2rem;
-  margin: 2rem 0;
+  margin: 1em 0;
+  text-align: center;
 }
 
 .description {
   line-height: 1;
-  margin: 2rem 0;
+  margin: 1rem;
   font-size: 1.2rem;
+  text-align: center;
 }
 
 .button {
   border-radius: 4px;
-  background-color: rgb(168, 33, 154);
-  border: none;
-  color: #ffffff;
+  background: linear-gradient(to bottom right, #9b4dff, #ff4d4d);
+  border: 1px solid #fff;
+  color: #fff;
   font-size: 15px;
   padding: 20px;
   width: 200px;
@@ -45,6 +52,7 @@
   margin-bottom: 2%;
   margin: 1px;
 }
+
 @media (max-width: 1000px) {
   .main {
     width: 100%;
@@ -75,6 +83,9 @@
   margin-bottom: 2%;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
   border-radius: 10px;
+  background-color: #2d2d2d;
+  color: #ffffff;
+  border: none;
 }
 
 .inputDiv {
@@ -82,9 +93,11 @@
   height: 100%;
   padding: 1%;
   margin: 2%;
-  border: lightslategray;
+  border: 1px solid #363636;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
   border-radius: 10px;
+  background-color: #1c1c1c;
+  color: #ffffff;
 }
 
 .select {
@@ -94,11 +107,14 @@
   width: 175px;
   cursor: pointer;
   margin: 2%;
+  background-color: #2d2d2d;
+  color: #ffffff;
+  border: none;
 }
 
 .button1 {
   border-radius: 4px;
-  background-color: blue;
+  background-color: #e60073;
   border: none;
   color: #ffffff;
   font-size: 15px;
@@ -112,4 +128,41 @@
   border-collapse: collapse;
   width: 100%;
   text-align: left;
+  background-color: #1c1c1c;
+  color: #ffffff;
+}
+
+.player1 {
+  background-image: url(/redbackclearcut.png);
+  margin: 5px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 200px;
+  width: 28%;
+  float: left;
+}
+
+.player2 {
+  background-image: url(/redbackclearcut.png);
+  margin-left: 2em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 200px;
+  width: 28%;
+  float: left;
+  transform: rotate(90deg);
+}
+
+.grid {
+  max-width: 1000px;
+  margin-left: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.clearBoth {
+  clear: both;
 }
