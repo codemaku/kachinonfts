@@ -123,6 +123,12 @@ export const abi = [
       {
         indexed: false,
         internalType: "uint256",
+        name: "betPlaced",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
         name: "betAmount",
         type: "uint256",
       },
@@ -161,6 +167,11 @@ export const abi = [
         internalType: "address",
         name: "betAddress",
         type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "betPlaced",
+        type: "uint256",
       },
       {
         internalType: "uint256",
@@ -253,7 +264,7 @@ export const abi = [
     inputs: [
       {
         internalType: "uint256",
-        name: "_betAmount",
+        name: "_betPlaced",
         type: "uint256",
       },
     ],
@@ -286,14 +297,20 @@ export const abi = [
     inputs: [],
     name: "resolveGame",
     outputs: [],
-    stateMutability: "payable",
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
-    inputs: [],
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_betPlaced",
+        type: "uint256",
+      },
+    ],
     name: "startGame",
     outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "payable",
     type: "function",
   },
   {
@@ -310,9 +327,29 @@ export const abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "withdraw",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "withdrawThis",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     stateMutability: "payable",
     type: "receive",
   },
 ];
 export const RANDOM_GAME_NFT_CONTRACT_ADDRESS =
-  "0x24e1B95f11Fc8D909382FED8cA98b33487270580";
+  "0x7e95a4Aa7493f88EC033595B323F50F1E47f85fA";

@@ -39,8 +39,8 @@ export default function Home() {
           <Link className={styles.link} href="roulettehigh2step">
             Roulette H 2 Step
           </Link>
-          <Link className={styles.link} href="bacaratbanker">
-            Bacarat Banker
+          <Link className={styles.link} href="bacarat">
+            Bacarat
           </Link>
         </div>
         <div>

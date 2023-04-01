@@ -14,6 +14,7 @@ function FETCH_PLAYERS_GAME() {
               id
               gameId
               player
+              betPlaced
               betAmount
           }
       }`;

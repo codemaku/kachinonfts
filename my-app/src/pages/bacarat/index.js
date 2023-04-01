@@ -6,15 +6,15 @@ import Web3Modal from "web3modal";
 import {
   abi,
   RANDOM_GAME_NFT_CONTRACT_ADDRESS,
-} from "../../../constants/bacaratbanker";
+} from "../../../constants/bacarat";
 import {
   FETCH_CREATED_GAME,
   FETCH_PLAYERS_GAME,
   FETCH_RESULT_GAME,
   FETCH_CARD_GAME,
-} from "../../../queries/bacaratbanker";
+} from "../../../queries/bacarat";
 import styles from "../../styles/Home.module.css";
-import { subgraphQuery } from "../../../utils/bacaratbanker";
+import { subgraphQuery } from "../../../utils/bacarat";
 
 export default function Home() {
   const zero = BigNumber.from("0");
@@ -26,6 +26,8 @@ export default function Home() {
   const [isOwner, setIsOwner] = useState(false);
   // entryFee is the ether required to enter a game
   const [entryFee, setEntryFee] = useState(zero);
+  // betPlaced is the bet to enter a game
+  const [betPlaced, setBetPlaced] = useState(zero);
   // maxPlayers is the max number of players that can play the game
   const [maxPlayers, setMaxPlayers] = useState(0);
   // Checks if a game started or not
@@ -122,7 +124,9 @@ export default function Home() {
       );
       setLoading(true);
       // call the startGame function from the contract
-      const tx = await randomGameNFTContract.startGame();
+      const tx = await randomGameNFTContract.startGame(betPlaced, {
+        value: entryFee,
+      });
       await tx.wait();
       setLoading(false);
     } catch (err) {
@@ -145,9 +149,7 @@ export default function Home() {
       );
       setLoading(true);
       // call the startGame function from the contract
-      const tx = await randomGameNFTContract.resolveGame({
-        value: 0,
-      });
+      const tx = await randomGameNFTContract.resolveGame();
       await tx.wait();
       setLoading(false);
     } catch (err) {
@@ -173,7 +175,7 @@ export default function Home() {
       );
       setLoading(true);
       // call the startGame function from the contract
-      const tx = await randomGameNFTContract.joinGame(entryFee, {
+      const tx = await randomGameNFTContract.joinGame(betPlaced, {
         value: entryFee,
       });
       await tx.wait();
@@ -268,10 +270,9 @@ export default function Home() {
         providerOptions: {},
         disableInjectedProvider: false,
       });
-      connectWallet();
       getOwner();
-      checkIfGameStarted();
       setInterval(() => {
+        connectWallet();
         checkIfGameStarted();
       }, 2000);
     }
@@ -299,12 +300,22 @@ export default function Home() {
       if (betBlock <= currentBlock) {
         return (
           <button className={styles.button} onClick={resolveGame}>
-            Resolve Game
+            Deal the cards for {betBlock}!
           </button>
         );
       }
       return (
         <div>
+          <input
+            type="number"
+            className={styles.input}
+            onChange={(e) => {
+              // The user will enter the value in ether, we will need to convert
+              // it to WEI using parseEther
+              setBetPlaced(e.target.value >= 0 ? e.target.value : 0);
+            }}
+            placeholder="1 player, 2 banker, 3 tie"
+          />
           <input
             type="number"
             className={styles.input}
@@ -320,7 +331,7 @@ export default function Home() {
             placeholder="Bet Amount (ETH)"
           />
           <button className={styles.button} onClick={joinGame}>
-            Join Game 🚀
+            Join Game at {betBlock} 🚀
           </button>
         </div>
       );
@@ -329,8 +340,32 @@ export default function Home() {
     if (!gameStarted) {
       return (
         <div>
+          <input
+            type="number"
+            className={styles.input}
+            onChange={(e) => {
+              // The user will enter the value in ether, we will need to convert
+              // it to WEI using parseEther
+              setBetPlaced(e.target.value >= 0 ? e.target.value : 0);
+            }}
+            placeholder="1 player, 2 banker, 3 tie"
+          />
+          <input
+            type="number"
+            className={styles.input}
+            onChange={(e) => {
+              // The user will enter the value in ether, we will need to convert
+              // it to WEI using parseEther
+              setEntryFee(
+                e.target.value >= 0
+                  ? utils.parseEther(e.target.value.toString())
+                  : zero
+              );
+            }}
+            placeholder="Bet Amount (ETH)"
+          />
           <button className={styles.button} onClick={startGame}>
-            Start Game 🚀
+            Start Game that deals in 3 blocks time🚀
           </button>
         </div>
       );
@@ -347,22 +382,28 @@ export default function Home() {
       <div className={styles.main}>
         <div>
           <h1 className={styles.title}>Kachino Bacarat Banker</h1>
-          <div className={styles.description}>
-            Its a simplified bacarat game where you can only bet on banker.
-          </div>
-          <div className={styles.description}>
-            Protip: dont bet more than the Dealers bankroll.
-          </div>
+          <div className={styles.description}>Decentralised Bacarat</div>
           <div>
             <br />
+            Max bet per round:
             <br />
-            {utils.formatEther(etherBalanceContract)} Dealer ETH Balance
+            {Math.round((utils.formatEther(etherBalanceContract) / 30) * 1000) /
+              1000}{" "}
+            ETH player and banker
             <br />
-            {utils.formatEther(cardsInDeck)} Cards Remaining in Deck
+            {Math.round(
+              (utils.formatEther(etherBalanceContract) / 300) * 1000
+            ) / 1000}{" "}
+            ETH tie
+            <br />
+            <br />
+            {utils.formatEther(cardsInDeck) * 10 ** 18} Cards Remaining in Deck
+            <br />
             <br />
             {currentBlock} current block
             <br />
             {betBlock} bet block
+            <br />
             <br />
           </div>
 
@@ -379,12 +420,15 @@ export default function Home() {
             <div className={styles.log} key={index}>
               {log.player}
               <br />
-              Id{")"} {log.gameId} BetAmount{")"}{" "}
-              {utils.formatEther(log.betAmount)} ETH
+              Id{")"} {log.gameId} BetPlaced{")"}
+              {log.betPlaced} BetAmount{")"} {utils.formatEther(log.betAmount)}{" "}
+              ETH
             </div>
           ))}
-          <div className={styles.description}>Card Dealt</div>
-          {cardLogs.cardDealts?.map((log, index) => (
+          <div className={styles.description}>
+            Cards Dealt (1=A,2=2,...,Q=12,K=13)
+          </div>
+          {cardLogs.cardsDealts?.map((log, index) => (
             <div className={styles.log} key={index}>
               Id{")"} {log.gameId} p1{")"} {log.p1} p2{")"} {log.p2} p3{")"}{" "}
               {log.p3} b1{")"} {log.b1} b2{")"} {log.b2} b3{")"} {log.b3}
